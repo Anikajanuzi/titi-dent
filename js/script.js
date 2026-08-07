@@ -115,3 +115,28 @@ function render(){
   document.querySelector('main').innerHTML=html; bind();
 }
 render();
+
+/* Training imagery moved into the Prosthetics portfolio */
+const trainingNavIndex=pageFiles.indexOf('trainings.html');
+if(trainingNavIndex!==-1){
+  pageFiles.splice(trainingNavIndex,1);
+  t.sq.nav.splice(trainingNavIndex,1);
+  t.en.nav.splice(trainingNavIndex,1);
+}
+t.sq.trainingHighlight=['Rritje përmes mësimit','Trajnim që forcon çdo detaj','Zhvillimi profesional është pjesë e kulturës së TITI DENT. Çdo trajnim pasuron njohuritë, rafinon metodën e punës dhe ndihmon që çdo restaurim të trajtohet me të njëjtin përkushtim ndaj precizitetit.',['Edukimi i vazhdueshëm','Përvojë profesionale']];
+t.en.trainingHighlight=['Growth through learning','Training that strengthens every detail','Professional development is part of the TITI DENT culture. Every training experience deepens knowledge, refines the working method and supports the same commitment to precision in every restoration.',['Continuing education','Professional experience']];
+function prosthetics(d){
+  return `${section(d.prosthetics)}<div class="portfolio">${prostheticPhotos.map((photo,index)=>`<article class="reveal"><img src="assets/prosthetics/${photo}" onerror="this.onerror=null;this.src='assets/logo.jpeg'" alt="TITI DENT dental prosthetic"><p>${d.prosthetics[3][index%3]}</p></article>`).join('')}</div></section>${section(d.trainingHighlight,'muted')}<div class="training-grid">${trainingPhotos.map((photo,index)=>`<article class="training-card reveal"><img src="assets/trainings/${photo}" alt="TITI DENT professional training"><div><span>${String(index+1).padStart(2,'0')}</span><h3>${d.trainingHighlight[3][index]}</h3></div></article>`).join('')}</div></section>`;
+}
+function render(){
+  const d=t[lang]; let html='';
+  document.documentElement.lang=lang; header(d); footer(d);
+  if(page==='home') html=`<section class="hero grid"><div class="hero-copy reveal"><p class="eyebrow">${d.hero[0]}</p><h1>TITI <em>DENT</em></h1><h2>${d.hero[1]}</h2><p class="lead">${d.hero[2]}</p><div class="actions"><a class="button primary" href="laboratory.html">${d.hero[3]}</a><a class="button" href="prosthetics.html">${d.hero[4]}</a><a class="button" href="contact.html">${d.hero[5]}</a></div></div><div class="hero-logo reveal"><img src="assets/logo.jpeg" alt="TITI DENT"></div></section>${services(d)}`;
+  if(page==='laboratory') html=`${section(d.history)}<div class="timeline">${d.history[3].map((item,index)=>`<article class="reveal"><strong>${index?'0'+(index+1):'2010'}</strong><p>${item}</p></article>`).join('')}</div></section>${services(d)}`;
+  if(page==='patients') html=`${section(d.patients,'full')}<div class="film-viewport"><div class="film">${[...patientPhotos,...patientPhotos,...patientPhotos,...patientPhotos].map(photo=>`<img src="assets/patients/${photo}" onerror="this.onerror=null;this.src='assets/logo.jpeg'" alt="TITI DENT patient result">`).join('')}</div></div><div class="testimonial-grid">${d.patients[3].map(item=>`<article class="testimonial reveal">\u201c${item}\u201d<b>\u2014 TITI DENT</b></article>`).join('')}</div></section>`;
+  if(page==='prosthetics') html=prosthetics(d);
+  if(page==='pricing') html=pricing(d);
+  if(page==='contact') html=contact(d);
+  document.querySelector('main').innerHTML=html; bind();
+}
+render();
