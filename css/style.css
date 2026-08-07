@@ -32,3 +32,6 @@ main{display:block;flex:1}
 .training-card span{color:var(--cyan);font-size:11px;font-weight:700;letter-spacing:.16em}
 .training-card h3{margin:0;font-size:18px}
 @media(max-width:680px){.training-grid{grid-template-columns:1fr;margin-top:30px}.training-card img{height:min(68vw,360px)}}
+
+.muted>.training-grid{max-width:1240px;margin-left:auto;margin-right:auto}
+

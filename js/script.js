@@ -18,13 +18,10 @@ function pricing(d){return `${section(['TITI DENT',d.pricing[0],d.pricing[1]],'m
 function prosthetics(d){return `${section(d.prosthetics)}<div class="portfolio">${prostheticPhotos.map((x,i)=>`<article class="reveal"><img src="assets/prosthetics/${x}" onerror="this.onerror=null;this.src='assets/logo.jpeg'" alt="TITI DENT dental prosthetic"><p>${d.prosthetics[3][i%3]}</p></article>`).join('')}</div></section>`}
 function render(){let d=t[lang],html='';document.documentElement.lang=lang;header(d);footer(d);if(page==='home')html=`<section class="hero grid"><div class="hero-copy reveal"><p class="eyebrow">${d.hero[0]}</p><h1>TITI <em>DENT</em></h1><h2>${d.hero[1]}</h2><p class="lead">${d.hero[2]}</p><div class="actions"><a class="button primary" href="laboratory.html">${d.hero[3]}</a><a class="button" href="prosthetics.html">${d.hero[4]}</a><a class="button" href="contact.html">${d.hero[5]}</a></div></div><div class="hero-logo reveal"><img src="assets/logo.jpeg" alt="TITI DENT"></div></section>${services(d)}`;if(page==='laboratory')html=`${section(d.history)}<div class="timeline">${d.history[3].map((x,i)=>`<article class="reveal"><strong>${i?'0'+(i+1):'2010'}</strong><p>${x}</p></article>`).join('')}</div></section>${services(d)}`;if(page==='patients')html=`${section(d.patients,'full')}<div class="film-viewport"><div class="film">${[...patientPhotos,...patientPhotos,...patientPhotos,...patientPhotos].map(x=>`<img src="assets/patients/${x}" onerror="this.onerror=null;this.src='assets/logo.jpeg'" alt="TITI DENT patient result">`).join('')}</div></div><div class="testimonial-grid">${d.patients[3].map(x=>`<article class="testimonial reveal">\u201c${x}\u201d<b>\u2014 TITI DENT</b></article>`).join('')}</div></section>`;if(page==='prosthetics')html=prosthetics(d);if(page==='pricing')html=pricing(d);if(page==='contact')html=contact(d);document.querySelector('main').innerHTML=html;bind()}
 document.head.insertAdjacentHTML('beforeend','<style>#tooth-loader{position:fixed;inset:0;z-index:100;display:grid;place-content:center;text-align:center;background:#0f1115;opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s}#tooth-loader.show{opacity:1;visibility:visible}.loader-tooth{font-size:76px;line-height:1;color:#43d8f9;filter:drop-shadow(0 0 18px #43d8f9);animation:toothSpin .7s ease-in-out infinite alternate}#tooth-loader p{font-size:11px;letter-spacing:.35em;color:#dfe7ee;margin-top:20px}@keyframes toothSpin{to{transform:rotate(12deg) scale(1.12);filter:drop-shadow(0 0 32px #43d8f9)}}.rating button{border:0;background:transparent;color:#ffffff44;font-size:23px;cursor:pointer;padding:0}.rating button.selected{color:#43d8f9}.nav nav a.active{color:#43d8f9}.contact-card a{color:#43d8f9;text-decoration:none}</style>');
-render();
 t.sq.feedbackError='Nuk mund ta d\u00ebrgonim mesazhin. Ju lutemi provoni p\u00ebrs\u00ebri.';
 t.en.feedbackError='We could not send your message. Please try again.';
 document.head.insertAdjacentHTML('beforeend','<style>.feedback-notice{margin:0;color:#ffb4b4;font-size:13px}.button:disabled{opacity:.65;cursor:wait}</style>');
 function render(){let d=t[lang],html='';document.documentElement.lang=lang;header(d);footer(d);if(page==='home')html=`<section class="hero grid"><div class="hero-copy reveal"><p class="eyebrow">${d.hero[0]}</p><h1>TITI <em>DENT</em></h1><h2>${d.hero[1]}</h2><p class="lead">${d.hero[2]}</p><div class="actions"><a class="button primary" href="laboratory.html">${d.hero[3]}</a><a class="button" href="prosthetics.html">${d.hero[4]}</a><a class="button" href="contact.html">${d.hero[5]}</a></div></div><div class="hero-logo reveal"><img src="assets/logo.jpeg" alt="TITI DENT"></div></section>${services(d)}`;if(page==='laboratory')html=`${section(d.history)}<div class="timeline">${d.history[3].map((x,i)=>`<article class="reveal"><strong>${i?'0'+(i+1):'2010'}</strong><p>${x}</p></article>`).join('')}</div></section>${services(d)}`;if(page==='patients')html=`${section(d.patients,'full')}<div class="film-viewport"><div class="film">${[...patientPhotos,...patientPhotos,...patientPhotos,...patientPhotos].map(x=>`<img src="assets/patients/${x}" onerror="this.onerror=null;this.src='assets/logo.jpeg'" alt="TITI DENT patient result">`).join('')}</div></div><div class="testimonial-grid">${d.patients[3].map(x=>`<article class="testimonial reveal">\u201c${x}\u201d<b>\u2014 TITI DENT</b></article>`).join('')}</div></section>`;if(page==='prosthetics')html=prosthetics(d);if(page==='pricing')html=pricing(d);if(page==='contact')html=contact(d);document.querySelector('main').innerHTML=html;bind()}
-render();
-render();
 /* Contact page without feedback form */
 function contact(d){
   const cards=d.contact.slice(3);
@@ -47,9 +44,6 @@ function bind(){
   }),{threshold:.12});
   document.querySelectorAll('.reveal').forEach(element=>observer.observe(element));
 }
-
-render();
-
 /* Refined, compact footer */
 function footer(d){
   document.querySelector('#site-footer').innerHTML=`
@@ -66,8 +60,6 @@ function footer(d){
       </div>
     </footer>`;
 }
-render();
-
 /* Distinct, researched service descriptions */
 t.sq.services[3]=[
   'Proteza fleksibël, pa metal, e projektuar të përshtatet rehat me konturet e gojës. Zgjidhja përfundimtare përcaktohet gjithmonë sipas rastit klinik.',
@@ -90,8 +82,6 @@ t.en.services[3]=[
 function services(d){
   return `${section(d.services,'muted')}<div class="service-grid">${d.services[2].map((name,index)=>`<article class="service reveal"><div class="icon">${icons[index]}</div><h3>${name}</h3><p>${d.services[3][index]}</p></article>`).join('')}</div></section>`;
 }
-render();
-
 /* Professional training page */
 pageFiles.splice(2,0,'trainings.html');
 t.sq.nav.splice(2,0,'Trajnime');
@@ -114,8 +104,6 @@ function render(){
   if(page==='contact') html=contact(d);
   document.querySelector('main').innerHTML=html; bind();
 }
-render();
-
 /* Training imagery moved into the Prosthetics portfolio */
 const trainingNavIndex=pageFiles.indexOf('trainings.html');
 if(trainingNavIndex!==-1){
@@ -139,4 +127,6 @@ function render(){
   if(page==='contact') html=contact(d);
   document.querySelector('main').innerHTML=html; bind();
 }
+
+/* Render only after every page definition and translation is ready */
 render();
