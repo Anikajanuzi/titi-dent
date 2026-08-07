@@ -67,3 +67,51 @@ function footer(d){
     </footer>`;
 }
 render();
+
+/* Distinct, researched service descriptions */
+t.sq.services[3]=[
+  'Proteza fleksibël, pa metal, e projektuar të përshtatet rehat me konturet e gojës. Zgjidhja përfundimtare përcaktohet gjithmonë sipas rastit klinik.',
+  'Bazë dentare prej akrilati e punuar sipas masës për proteza të plota ose të pjesshme. Materiali lejon rregullime dhe riparime kur nevojiten.',
+  'Kurorë pa metal nga zirkoni, një qeramikë me rezistencë të lartë. Përpunimi preciz synon forcë të besueshme dhe një pamje të rafinuar.',
+  'Strukturë metalike e veshur me porcelan dentar, që bashkon mbështetjen e brendshme me estetikën e sipërfaqes së dhëmbit.',
+  'Kurora, ura ose proteza të projektuara për t’u lidhur me implante dentare. Çdo punim krijohet sipas planit të mjekut dhe anatomisë së pacientit.',
+  'Aparat i personalizuar që ndihmon në ruajtjen e pozicionit të dhëmbëve pas trajtimit ortodontik dhe në kufizimin e rikthimit të tyre.',
+  'Mbrojtëse okluzale e punuar sipas masës, që krijon një shtresë mbrojtëse ndërmjet dhëmbëve gjatë shtrëngimit ose kërcitjes natën.'
+];
+t.en.services[3]=[
+  'A flexible, metal-free removable denture designed to sit comfortably around the contours of the mouth. The final option is always selected for the individual clinical case.',
+  'A custom acrylic base for complete or partial dentures. This material can allow adjustments and repairs when they are needed.',
+  'A metal-free zirconia crown made from a high-strength ceramic. Precise finishing supports dependable strength with a refined appearance.',
+  'A metal substructure veneered with dental porcelain, combining internal support with the aesthetics of a tooth-coloured surface.',
+  'Crowns, bridges or dentures designed to connect with dental implants. Each restoration is made around the clinician’s plan and the patient’s anatomy.',
+  'A custom appliance that helps maintain tooth position after orthodontic treatment and reduces the tendency for teeth to move back.',
+  'A custom occlusal guard that forms a protective layer between the teeth during night-time clenching or grinding.'
+];
+function services(d){
+  return `${section(d.services,'muted')}<div class="service-grid">${d.services[2].map((name,index)=>`<article class="service reveal"><div class="icon">${icons[index]}</div><h3>${name}</h3><p>${d.services[3][index]}</p></article>`).join('')}</div></section>`;
+}
+render();
+
+/* Professional training page */
+pageFiles.splice(2,0,'trainings.html');
+t.sq.nav.splice(2,0,'Trajnime');
+t.en.nav.splice(2,0,'Trainings');
+t.sq.trainings=['Zhvillim profesional','Trajnime dhe edukim i vazhdueshëm','Që nga themelimi i TITI DENT, Astrit Januzi ka investuar vazhdimisht në trajnime profesionale për të zgjeruar njohuritë dhe për të përsosur punën laboratorike. Kjo përvojë e vazhdueshme ndihmon që çdo rast të trajtohet me kujdes, metodë dhe vëmendje ndaj detajeve.',['Trajnim profesional','Mësim i vazhdueshëm']];
+t.en.trainings=['Professional development','Training and continuing education','Since founding TITI DENT, Astrit Januzi has continued to invest in professional training to deepen knowledge and refine laboratory work. This commitment to learning supports a careful, methodical and detail-focused approach to every case.',['Professional training','Continuous learning']];
+const trainingPhotos=['training-1.jpg','training-2.jpg'];
+function trainings(d){
+  return `${section(d.trainings)}<div class="training-grid">${trainingPhotos.map((photo,index)=>`<article class="training-card reveal"><img src="assets/trainings/${photo}" alt="TITI DENT professional training"><div><span>${String(index+1).padStart(2,'0')}</span><h3>${d.trainings[3][index]}</h3></div></article>`).join('')}</div></section>`;
+}
+function render(){
+  const d=t[lang]; let html='';
+  document.documentElement.lang=lang; header(d); footer(d);
+  if(page==='home') html=`<section class="hero grid"><div class="hero-copy reveal"><p class="eyebrow">${d.hero[0]}</p><h1>TITI <em>DENT</em></h1><h2>${d.hero[1]}</h2><p class="lead">${d.hero[2]}</p><div class="actions"><a class="button primary" href="laboratory.html">${d.hero[3]}</a><a class="button" href="prosthetics.html">${d.hero[4]}</a><a class="button" href="contact.html">${d.hero[5]}</a></div></div><div class="hero-logo reveal"><img src="assets/logo.jpeg" alt="TITI DENT"></div></section>${services(d)}`;
+  if(page==='laboratory') html=`${section(d.history)}<div class="timeline">${d.history[3].map((item,index)=>`<article class="reveal"><strong>${index?'0'+(index+1):'2010'}</strong><p>${item}</p></article>`).join('')}</div></section>${services(d)}`;
+  if(page==='trainings') html=trainings(d);
+  if(page==='patients') html=`${section(d.patients,'full')}<div class="film-viewport"><div class="film">${[...patientPhotos,...patientPhotos,...patientPhotos,...patientPhotos].map(photo=>`<img src="assets/patients/${photo}" onerror="this.onerror=null;this.src='assets/logo.jpeg'" alt="TITI DENT patient result">`).join('')}</div></div><div class="testimonial-grid">${d.patients[3].map(item=>`<article class="testimonial reveal">\u201c${item}\u201d<b>\u2014 TITI DENT</b></article>`).join('')}</div></section>`;
+  if(page==='prosthetics') html=prosthetics(d);
+  if(page==='pricing') html=pricing(d);
+  if(page==='contact') html=contact(d);
+  document.querySelector('main').innerHTML=html; bind();
+}
+render();

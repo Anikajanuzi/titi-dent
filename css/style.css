@@ -22,3 +22,13 @@ main{display:block;flex:1}
 .site-footer .footer-meta{display:flex;min-width:max-content;flex-direction:column;align-items:flex-end;gap:5px}
 .site-footer .footer-meta .social{margin-top:9px}
 @media(max-width:680px){.site-footer{flex-wrap:wrap;gap:16px;padding:30px 20px}.site-footer .footer-copy{flex:1 1 calc(100% - 80px)}.site-footer .footer-meta{width:100%;align-items:flex-start;padding-top:4px;border-top:1px solid rgba(255,255,255,.09)}.site-footer .footer-meta .social{margin-top:8px}}
+
+/* Training gallery */
+.training-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:45px}
+.training-card{overflow:hidden;border:1px solid rgba(197,201,209,.24);border-radius:20px;background:linear-gradient(135deg,rgba(255,255,255,.09),rgba(255,255,255,.035));box-shadow:inset 0 1px rgba(255,255,255,.12),0 18px 45px rgba(0,0,0,.25)}
+.training-card img{display:block;width:100%;height:350px;object-fit:cover;transition:transform .45s ease}
+.training-card:hover img{transform:scale(1.035)}
+.training-card>div{display:flex;align-items:baseline;gap:12px;padding:18px 20px}
+.training-card span{color:var(--cyan);font-size:11px;font-weight:700;letter-spacing:.16em}
+.training-card h3{margin:0;font-size:18px}
+@media(max-width:680px){.training-grid{grid-template-columns:1fr;margin-top:30px}.training-card img{height:min(68vw,360px)}}
